@@ -1,10 +1,18 @@
 #-*- coding:utf-8 -*-
-import os
-import sys
-import SimpleITK as sitk
-import numpy as np
+
+#-*- coding:utf-8 -*-
+# Author: Lajipeng
+# Data: 2019/8/12
+# Fuction: creat .bat as below
 # c3d.exe -dicom-series-read C:/Users/10446/Desktop/1  1.2.840.113619.2.55.3.2831164355.701.1526254298.770.3.31.250000512512 -type short -omc C:/Users/10446/Desktop/moving.mh
-#a模式
+# a模式
+import os
+
+import sys
+
+import SimpleITK as sitk
+
+import numpy as np
 
 filename = '2.bat'
 Text1 = "c3d.exe -dicom-series-read"
