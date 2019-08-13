@@ -3,7 +3,6 @@
 # Data: 2019/8/12
 # Fuction: Transform dcm files to mhd
 
-import cv2
 
 import os
 
@@ -12,8 +11,6 @@ import pydicom
 import numpy
 
 import SimpleITK as sitk
-
-import matplotlib.pyplot as plt
 
 import sys
 
@@ -86,7 +83,7 @@ for i in F1:
 #%%
         # 5: Read all the dicom image in the list and put the pixel_array in the 3D-array
 
-        lstFilesDCM.clear()
+        
         for filenameDCM in lstFilesDCM:
                 #print(filenameDCM)
                 ds = pydicom.read_file(filenameDCM)
@@ -94,7 +91,7 @@ for i in F1:
                 pixel_array = window_adjust(ds)
                 #print(pixel_array)
                 ArrayDicom[:, :, lstFilesDCM.index(filenameDCM)] = pixel_array
-        
+        lstFilesDCM.clear()
         
 
          
