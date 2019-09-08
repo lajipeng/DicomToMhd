@@ -6,9 +6,10 @@ import pydicom
 
 import numpy as np
 
+#import sys 
 
-def mat2gray(img,limits):
-        
+
+def mat2gray(img,limits):    
         rows = len(img)
         cols = len(img[0])
         for i in range(0,rows):
@@ -22,9 +23,16 @@ def mat2gray(img,limits):
         return img
                                         
 def window_adjust(ds):
-        
-        WindowCenter = ds.WindowCenter/ds.RescaleSlope - ds.RescaleIntercept
-        WindowWidth = ds.WindowWidth/ds.RescaleSlope
+        # The WindowCenter and WindowWidth are fixed, and there is no need to compute.
+        # size = sys.getsizeof(ds.WindowCenter)
+        # if size <= 34:
+        #         WindowCenter = ds.WindowCenter[0]/ds.RescaleSlope - ds.RescaleIntercept
+        #         WindowWidth = ds.WindowWidth[0]/ds.RescaleSlope
+        # else:
+        #         WindowCenter = ds.WindowCenter/ds.RescaleSlope - ds.RescaleIntercept
+        #         WindowWidth = ds.WindowWidth/ds.RescaleSlope
+        WindowCenter = 1064.0
+        WindowWidth = 400.0
         limits=[]
         limits.append(WindowCenter - (WindowWidth/2))
         limits.append(WindowCenter + (WindowWidth/2))

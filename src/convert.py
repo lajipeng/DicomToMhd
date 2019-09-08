@@ -20,23 +20,23 @@ from adjust_window import window_adjust
 #%%
 # Path Statement
 
-PathDicom = "E:/Research/Liver 20181228/#2"		# where to save dicom files 
+PathDicom = "H:/Research/Liver 20181228/#3"		# where to save dicom files 
 
-SaveRawDicom = "E:/Research/Liver 20181228 mhd/#2"     # where to save mhd and raw files
+SaveRawDicom = "H:/Research/Liver 20181228 mhd/#3"     # where to save mhd and raw files
 
 lstFilesDCM = []
 F1 = os.listdir(PathDicom)
 count = 0
 for i in F1:
     count = count + 1
-    if(count<=10):
+    if count <= 2:
         continue    
     F2 = os.listdir(PathDicom + '/' + i)
     F1_i = i
     s = []
     for j in F2:
         F1_j = PathDicom + '/' + F1_i + '/' + j 
-        F2_j = SaveRawDicom + '/' + F1_i + '/' + j + '/' + j + '.mhd'
+        F2_j = SaveRawDicom + '/' + F1_i + '/' + j + '/' + j.replace( ' ' , '_' ) + '.mhd'
         
         # load the path of saving dicom files 
 
@@ -111,3 +111,5 @@ for i in F1:
         sitk.WriteImage(sitk_img, F2_j)
 
         print("%s successfully transformed!" % F1_j)
+
+        #sys.exit(0)

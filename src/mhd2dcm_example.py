@@ -3,13 +3,14 @@ from __future__ import print_function
 import SimpleITK as sitk
 
 import sys, time, os
+
 import numpy as np
 
 #if len( sys.argv ) < 2:
 #    print( "Usage: python " + __file__ + "<output_directory>" )
 #    sys.exit ( 1 )
-path = "./Research/test/"
-data_directory = path
+path1 = r"C:\Users\10446\Desktop\1"
+data_directory = path1
 series_IDs = sitk.ImageSeriesReader.GetGDCMSeriesIDs(data_directory)
 print(series_IDs)
 def writeSlices(series_tag_values, new_img, i):
@@ -34,9 +35,11 @@ def writeSlices(series_tag_values, new_img, i):
     writer.Execute(image_slice)
 
 # Create a new series from a numpy array
-new_arr = np.random.uniform(-10, 10, size = (3,4,5)).astype(np.int16)
-new_img = sitk.GetImageFromArray(new_arr)
-new_img.SetSpacing([2.5,3.5,4.5])
+path2 = r"C:\Users\10446\Desktop\result.mhd"
+new_arr =sitk.ReadImage(path2)
+# new_img = sitk.GetImageFromArray(new_arr)
+new_img = sitk.GetArrayFromImage(new_arr)
+new_img.SetSpacing(new_arr.Spacing)
 # Write the 3D image as a series
 # IMPORTANT: There are many DICOM tags that need to be updated when you modify an
 #            original image. This is a delicate opration and requires knowlege of
@@ -74,7 +77,7 @@ list(map(lambda i: writeSlices(series_tag_values, new_img, i), range(new_img.Get
 # Re-read the series
 # Read the original series. First obtain the series file names using the
 # image series reader.
-data_directory = path
+data_directory = path1
 series_IDs = sitk.ImageSeriesReader.GetGDCMSeriesIDs(data_directory)
 if not series_IDs:
     print("ERROR: given directory \""+data_directory+"\" does not contain a DICOM series.")
